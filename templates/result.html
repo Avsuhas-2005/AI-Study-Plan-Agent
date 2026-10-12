@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Your Study Plan | StudyMate AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">StudyMate <span>AI</span></div>
+        <p>Your personalized study timetable</p>
+    </header>
+
+    <main class="container">
+
+        <section class="welcome">
+            <h1>Hello, {{ name }}! 👋</h1>
+
+            <p>
+                Here is your study plan for
+                <strong>{{ subject }}</strong>.
+            </p>
+        </section>
+
+        <section class="summary">
+            <div class="summary-card">
+                <h3>{{ subject }}</h3>
+                <p>Selected Subject</p>
+            </div>
+
+            <div class="summary-card">
+                <h3>{{ days }}</h3>
+                <p>Study Days</p>
+            </div>
+
+            <div class="summary-card">
+                <h3>{{ hours }}</h3>
+                <p>Hours Per Day</p>
+            </div>
+        </section>
+
+        <h2 class="section-heading">Your Daily Timetable</h2>
+
+        {% for day in timetable %}
+        <section class="day-card">
+
+            <h2>Day {{ day.day }}</h2>
+
+            {% for session in day.sessions %}
+            <div class="session">
+
+                <div class="session-time">
+                    {{ session.time }}
+                </div>
+
+                <div class="session-details">
+                    <h3>{{ session.topic }}</h3>
+                    <p>{{ session.duration }} minutes</p>
+                </div>
+
+            </div>
+            {% endfor %}
+
+        </section>
+        {% endfor %}
+
+        <div class="actions">
+            <button onclick="window.print()">
+                Print / Save as PDF
+            </button>
+
+            <a href="/" class="back-button">
+                Create Another Plan
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>StudyMate AI — Study with a plan, succeed with confidence.</p>
+    </footer>
+
+</body>
+</html>
